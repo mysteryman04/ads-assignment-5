@@ -99,5 +99,16 @@ public class BST<K extends Comparable<K>, V> {
             inorderTraversal(node.right, keys);
         }
     }
+    public int size() {
+        return size(root);
+    }
+
+    private int size(Node node) {
+        if (node == null) {
+            return 0;
+        } else {
+            return 1 + size(node.left) + size(node.right);
+        }
+    }
 }
 
