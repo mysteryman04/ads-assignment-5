@@ -46,9 +46,43 @@ public class BST<K extends Comparable<K>, V> {
             }
         }
         public void delete (K key){
-
+            root = delete(root, key);
         }
-//        public Iterable<K> iterator () {}/
+        private Node delete(Node node, K key) {
+            if (node == null) {
+                return null; // Key not found
+            }
+
+            int cmp = key.compareTo(node.key);
+            if (cmp < 0) {
+                node.left = delete(node.left, key); // Key might be in the left subtree
+            } else if (cmp > 0) {
+                node.right = delete(node.right, key); // Key might be in the right subtree
+            } else {
+                // Key found, perform deletion
+                if (node.left == null) {
+                    return node.right; // No left child, replace with right child (or null)
+                } else if (node.right == null) {
+                    return node.left; // No right child, replace with left child
+                } else {
+                    // Node has both left and right children
+                    Node successor = findMin(node.right); // Find the minimum node in the right subtree
+                    node.key = successor.key; // Replace current node with the successor
+                    node.val = successor.val;
+                    node.right = delete(node.right, successor.key); // Delete the successor node from the right subtree
+                }
+            }
+
+            return node;
+        }
+        private Node findMin(Node node) {
+            while (node.left != null) {
+                node = node.left;
+            }
+            return node;
+        }
+
+        public Iterable<K> iterator () {}
     }
 }
 
