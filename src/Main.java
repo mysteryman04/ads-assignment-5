@@ -9,5 +9,12 @@ public class Main {
         bst.put(12, "F");
         bst.put(17, "G");
 
+        System.out.println(bst.get(10));
+        System.out.println(bst.get(3));
+        System.out.println(bst.get(15));
+
+        bst.delete(7);
+        System.out.println(bst.get(7));
+
     }
 }
