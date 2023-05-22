@@ -1,5 +1,7 @@
-import java.util.ArrayList;
+
+
 import java.util.List;
+import java.util.ArrayList;
 
 public class BST<K extends Comparable<K>, V> {
     private Node root;
@@ -8,10 +10,12 @@ public class BST<K extends Comparable<K>, V> {
         private K key;
         private V val;
         private Node left, right;
+
         public Node(K key, V val) {
             this.key = key;
             this.val = val;
         }
+    }
         public void put(K key, V val) {
             root = put(root, key, val);
         }
@@ -53,26 +57,25 @@ public class BST<K extends Comparable<K>, V> {
         }
         private Node delete(Node node, K key) {
             if (node == null) {
-                return null; // Key not found
+                return null;
             }
 
             int cmp = key.compareTo(node.key);
             if (cmp < 0) {
-                node.left = delete(node.left, key); // Key might be in the left subtree
+                node.left = delete(node.left, key);
             } else if (cmp > 0) {
-                node.right = delete(node.right, key); // Key might be in the right subtree
+                node.right = delete(node.right, key);
             } else {
-                // Key found, perform deletion
                 if (node.left == null) {
-                    return node.right; // No left child, replace with right child (or null)
+                    return node.right;
                 } else if (node.right == null) {
-                    return node.left; // No right child, replace with left child
+                    return node.left;
                 } else {
-                    // Node has both left and right children
-                    Node successor = findMin(node.right); // Find the minimum node in the right subtree
-                    node.key = successor.key; // Replace current node with the successor
+
+                    Node successor = findMin(node.right);
+                    node.key = successor.key;
                     node.val = successor.val;
-                    node.right = delete(node.right, successor.key); // Delete the successor node from the right subtree
+                    node.right = delete(node.right, successor.key);
                 }
             }
 
@@ -98,7 +101,6 @@ public class BST<K extends Comparable<K>, V> {
             keys.add(node.key);
             inorderTraversal(node.right, keys);
         }
-    }
     public int size() {
         return size(root);
     }

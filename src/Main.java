@@ -15,7 +15,7 @@ public class Main {
 
         bst.delete(7);
         System.out.println(bst.get(7));
-        System.out.println("Size of the tree: " + bst.size());
+        System.out.println("Size of the tree: " + bst.size())
 
         for (Integer key : bst) {
             System.out.println(key);
